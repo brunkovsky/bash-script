@@ -12,7 +12,7 @@ H12=`date +%H`
 M12=`date +%M`
 S12=`date +%S`
 
-wget -O rawfile --user=userName --password=userPassword "http://gcst.meteo.gov.ua/****/****/blanks.phtml?T1=UKOH&blank=zipfile&nabors=&numb=50&srok=$date1+$H12%3A$M12%3A$S12&dosrok=$date2+$H12%3A$M12%3A$S12&SA=on&SP=on&FC=on&FT=on"
+wget -O rawfile --user=userName --password=userPassword "http://*****.****.***.**/****/****/blanks.phtml?T1=UKOH&blank=zipfile&nabors=&numb=50&srok=$date1+$H12%3A$M12%3A$S12&dosrok=$date2+$H12%3A$M12%3A$S12&SA=on&SP=on&FC=on&FT=on"
 
 cat rawfile | grep "METAR\|=" | tr -s [:blank:] | tr -d '\r\n' | tr "\=" "\n" | sed s/$/=/g | grep "METAR" > file_met
 cat rawfile | grep "TAF\|=" | tr -s [:blank:] | tr -d '\r\n' | tr "\=" "\n" | sed s/$/=/g | grep "TAF" > file_taf
@@ -39,7 +39,7 @@ mkdir /home/briz/Desktop/SaveDataRemote/`date "+%Y"`
 mkdir /home/briz/Desktop/SaveDataRemote/`date "+%Y"`/`date "+%m"`
 mv file_app.pdf /home/briz/Desktop/SaveDataRemote/`date "+%Y"`/`date "+%m"`/`date "+%d"`_`date "+%m"`_`date "+%C"``date "+%y"`.pdf
 
-mutt -s "Save METAR, TAF, SPECI from CGM-site" -a /home/briz/Desktop/SaveDataRemote/`date "+%Y"`/`date "+%m"`/`date "+%d"`_`date "+%m"`_`date "+%C"``date "+%y"`.pdf amsg-cloud@yandex.ru < /dev/null
+mutt -s "Save METAR, TAF, SPECI from CGM-site" -a /home/briz/Desktop/SaveDataRemote/`date "+%Y"`/`date "+%m"`/`date "+%d"`_`date "+%m"`_`date "+%C"``date "+%y"`.pdf *********@yandex.ru < /dev/null
 
 rm rawfile file_met file_taf file_spe  file_app file_app.ps
 #rm `date "+%d"`_`date "+%m"`_`date "+%C"``date "+%y"`.pdf
