@@ -10,7 +10,7 @@ H12=`date +%H`
 M12=`date +%M`
 S12=`date +%S`
 
-wget -O rawfile --user=hersonmet --password=+tfxDWBf{X "http://gcst.meteo.gov.ua/armua/avia/blanks.phtml?T1=UKOH&blank=zipfile&nabors=&numb=1&srok=$date1+$H12%3A$M12%3A$S12&dosrok=$date2+$H12%3A$M12%3A$S12&SA=on&SP=off&FC=off&FT=off"
+wget -O rawfile --user=userName --password=userPassword "http://*********.***.**/******/*****/blanks.phtml?T1=UKOH&blank=zipfile&nabors=&numb=1&srok=$date1+$H12%3A$M12%3A$S12&dosrok=$date2+$H12%3A$M12%3A$S12&SA=on&SP=off&FC=off&FT=off"
 
 cat rawfile | grep "METAR\|=" | tr -s [:blank:] | tr -d '\r\n' | tr "\=" "\n" | sed s/$/=/g | grep "METAR" > file_met
 
