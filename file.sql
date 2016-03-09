@@ -1,0 +1,2 @@
+USE brizdb;
+SELECT body FROM tabl_msg WHERE name_m IN (SELECT name_m FROM tabl_prin_soob WHERE (ns_ab="נעןח" OR ns_ab="ûפעם" OR ns_ab="םמפע" OR ns_ab="עוהת") AND date_time>=(SELECT DATE_SUB(CURDATE(), Interval 1 DAY)));
