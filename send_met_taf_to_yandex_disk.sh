@@ -12,23 +12,23 @@ H12=`date +%H`
 M12=`date +%M`
 S12=`date +%S`
 
-wget -O rawfile --user=hersonmet --password=+tfxDWBf{X "http://gcst.meteo.gov.ua/armua/avia/blanks.phtml?T1=UKOH&blank=zipfile&nabors=&numb=50&srok=$date1+$H12%3A$M12%3A$S12&dosrok=$date2+$H12%3A$M12%3A$S12&SA=on&SP=on&FC=on&FT=on"
+wget -O rawfile --user=userName --password=userPassword "http://gcst.meteo.gov.ua/****/****/blanks.phtml?T1=UKOH&blank=zipfile&nabors=&numb=50&srok=$date1+$H12%3A$M12%3A$S12&dosrok=$date2+$H12%3A$M12%3A$S12&SA=on&SP=on&FC=on&FT=on"
 
 cat rawfile | grep "METAR\|=" | tr -s [:blank:] | tr -d '\r\n' | tr "\=" "\n" | sed s/$/=/g | grep "METAR" > file_met
 cat rawfile | grep "TAF\|=" | tr -s [:blank:] | tr -d '\r\n' | tr "\=" "\n" | sed s/$/=/g | grep "TAF" > file_taf
 cat rawfile | grep "SPECI\|=" | tr -s [:blank:] | tr -d '\r\n' | tr "\=" "\n" | sed s/$/=/g | grep "SPECI" > file_spe
 
-echo "                                                                       âÌÁÎË áðð" > file_app
-echo "                              ðÏÇÏÄÁ ÐÏ ÁÅÒÏÄÒÏÍÁÍ" >> file_app
+echo "                                                                       Ã¢ÄšÃÃŽÃ‹ Ã¡Ä‘Ä‘" > file_app
+echo "                              Ä‘ÄŽÃ‡ÄŽÃ„Ã ÄÄŽ ÃÄ¹Å‡ÄŽÃ„Å‡ÄŽÃÃÃ" >> file_app
 echo $date1 $H12:$M12 >> file_app
 echo "" >> file_app
-echo "SA æÁËÔÉÞÎÁ ÐÏÇÏÄÁ ÐÏ ÁÅÒÏÄÒÏÍÕ:" >> file_app
+echo "SA Ä‡ÃÃ‹Ã”Ã‰Å¢ÃŽÃ ÄÄŽÃ‡ÄŽÃ„Ã ÄÄŽ ÃÄ¹Å‡ÄŽÃ„Å‡ÄŽÃÅ:" >> file_app
 cat file_met >> file_app
 echo "" >> file_app
-echo "SP ûÔÏÒÍÏ×Á ÐÏÇÏÄÁ ÐÏ ÁÅÒÏÄÒÏÍÕ:" >> file_app
+echo "SP Å±Ã”ÄŽÅ‡ÃÄŽÃ—Ã ÄÄŽÃ‡ÄŽÃ„Ã ÄÄŽ ÃÄ¹Å‡ÄŽÃ„Å‡ÄŽÃÅ:" >> file_app
 cat file_spe >> file_app
 echo "" >> file_app
-echo "FC ðÒÏÇÎÏÚ ÐÏÇÏÄÉ ÐÏ ÁÅÒÏÄÒÏÍÕ:" >> file_app
+echo "FC Ä‘Å‡ÄŽÃ‡ÃŽÄŽÃš ÄÄŽÃ‡ÄŽÃ„Ã‰ ÄÄŽ ÃÄ¹Å‡ÄŽÃ„Å‡ÄŽÃÅ:" >> file_app
 cat file_taf >> file_app
 
 a2ps file_app --columns=1 -R -B -E -o file_app.ps
@@ -39,11 +39,7 @@ mkdir /home/briz/Desktop/SaveDataRemote/`date "+%Y"`
 mkdir /home/briz/Desktop/SaveDataRemote/`date "+%Y"`/`date "+%m"`
 mv file_app.pdf /home/briz/Desktop/SaveDataRemote/`date "+%Y"`/`date "+%m"`/`date "+%d"`_`date "+%m"`_`date "+%C"``date "+%y"`.pdf
 
-#echo "sending email"
 mutt -s "Save METAR, TAF, SPECI from CGM-site" -a /home/briz/Desktop/SaveDataRemote/`date "+%Y"`/`date "+%m"`/`date "+%d"`_`date "+%m"`_`date "+%C"``date "+%y"`.pdf amsg-cloud@yandex.ru < /dev/null
-#echo "email was sent"
 
 rm rawfile file_met file_taf file_spe  file_app file_app.ps
 #rm `date "+%d"`_`date "+%m"`_`date "+%C"``date "+%y"`.pdf
-rm -f /home/briz/core.*
-rm -f /home/briz/bin/core.*
